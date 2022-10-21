@@ -25,9 +25,6 @@ $ sudo apt-get install git
 $ sudo apt-get install python3
 ```
 
-## :blue_book: Authors
-* **Omar Cherni** - [@dreamdaddybanks](https://github.com/dreamdaddybanks)
-
 ## :mag: License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/dreamdaddybanks/holbertonschool-higher_level_programming/blob/master/LICENSE.md) file for details
