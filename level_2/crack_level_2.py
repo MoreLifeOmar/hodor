@@ -1,32 +1,25 @@
 #!/usr/bin/python3
 
-
-"""this module will be used for voting 1024 times
-    at the website provided"""
-import urllib
-from bs4 import BeautifulSoup
 import requests
+import sys
 
-failed = 0
+# level 2
 
-url = "http://158.69.76.135/level2.php"
-hs = { 'Referer': url,
-    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0'} 
-for i in range(0, 1024):
-    session = requests.session()
-    get_key_r = session.get(url, headers=hs)
-    content = get_key_r.content
-    soup = BeautifulSoup(content, 'html.parser')
-    inputs = soup.find_all('input')
-    for line in inputs:
-        if line.get('name') == "key":
-            key = line.get('value')
-    payload = {'id': '496', 'key': key, 'holdthedoor': 'submit'}
-    r = session.post(url, headers=hs, data=payload)
-    if r.status_code != 200:
-        print("failed to post {}th request".format(i))
-        failed += 1
-    if i % 10 == 0:
-        print("posted 10 requests so server")
-    del session
-print("Failed {} number of requests".format(failed))
+url = 'http://158.69.76.135/level2.php'
+string_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0'
+referer_string = 'http://158.69.76.135/level2.php'
+times = 1024
+id = 2500
+
+for i in range(times):
+
+    with requests.Session() as s:
+        r = s.get(url, headers={'User-Agent': string_agent})
+        c = r.cookies
+        key_form = ""
+        for cookie in c:
+            if cookie.name == 'HoldTheDoor':
+                key_form = cookie.value
+                break
+
+        l = s.post(url, data={'id': id, 'holdthedoor': 'Enviar', 'key': key_form}, headers={'User-Agent': string_agent, 'referer': referer_string}, cookies = c)
