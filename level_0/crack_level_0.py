@@ -1,18 +1,13 @@
 #!/usr/bin/python3
-
-
-"""this module will be used for voting 1024 times
-    at the website provided"""
 import requests
-import time
+import sys
 
-payload = {'id': '496', 'holdthedoor': 'Submit'}
-failed = 0
+#level 0
 
-for i in range(0, 1024):
-    r = requests.post("http://158.69.76.135/level0.php", data=payload)
-    if r.status_code != 200:
-        print("failed to post {}th request".format(i))
-        failed += 1
+url = 'http://158.69.76.135/level0.php'
+cookie_list = []
+id = 10320
+times = 1024
 
-print("Failed {} number of requests".format(failed))
+for i in range(times):
+    response_get = requests.post(url, data={'id': id, 'holdthedoor': 'Enviar'})
